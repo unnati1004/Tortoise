@@ -1,27 +1,36 @@
 // import logo from './logo.svg';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import './App.css';
 
 function App() {
-  const letter =()=>{
-    const alphabet = "abcdefghijklmnopqrstuvwxyz"
-    return alphabet[Math.floor(Math.random() * alphabet.length)]
+  const [alpha, setAlpha] = useState();
+  const [time,setTime] = useState(0)
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
+      const timer = ()=>{
+        setInterval(()=>{
+          setTime((i)=>i+1);
+        },0)
+      }
+  useEffect(() => {
+    if (alpha === randomLetter) {
+      console.log("detect");
+      setTime((i)=>i+1);
+    }
+    else {
+      console.log("error")
+      setTime((i)=>i+1.5);
+    }
+  }, [alpha])
+
+  const handleChange = (e) => {
+    setAlpha(e.target.value);
   }
-useEffect(()=>{
-document.addEventListener("keydown",detectkey)
-const a = letter();
-const detectkey=(e)=>{
-  // console.log(e.key);
-  if(e.key===randomCharacter)
-  {
-    console.log(randomCharacter,e.key)
-  }
-}
-})
   return (
     <div className="App">
-      <input type="text" onChange={letter}  className="ran" />
-       <p>Timer:{}</p>
+      <input type="text" value={randomLetter} className="ran" onChange={(e) => handleChange(e)} />
+      <p>Timer:{time}</p>
     </div>
   );
 }
