@@ -7,14 +7,12 @@ function App() {
   const [alpha, setAlpha] = useState();
   const [time,setTime] = useState(0)
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
-      const timer = ()=>{
-        setInterval(()=>{
-          setTime((i)=>i+1);
-        },0)
-      }
+  const randomLetter = alphabet[Math.floor(Math.random() * 20)]
+  
   useEffect(() => {
-    if (alpha === randomLetter) {
+
+    console.log(alpha);
+    if (alpha == randomLetter) {
       console.log("detect");
       setTime((i)=>i+1);
     }
@@ -25,6 +23,7 @@ function App() {
   }, [alpha])
 
   const handleChange = (e) => {
+    // console.log(e.target.value)
     setAlpha(e.target.value);
   }
   return (
